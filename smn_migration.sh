@@ -30,15 +30,15 @@ download()
 }
 
 case $req_action in
-upload)
+backup)
   upload "$tar_file"
   echo "Notebook image has been CREATED successfully"
   ;;
-download)
+restore)
   download "$tar_file"
   echo "Notebook image has been RESTORED successfully"
   ;;
 *)
-  echo "Unknown command [$req_action]. Usage upload [s3 path] or download [s3 path]"
+  echo "Unknown command [$req_action]. Usage backup [s3 path] or restore [s3 path]"
   ;;
 esac
