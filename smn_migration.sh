@@ -11,10 +11,11 @@ tar_file=$2
 upload()
 {
   echo "Compressing SageMaker content..."
-  tar -czvf /tmp/archive.tar.gz $sagemaker_folder
+  tar -czvf $sagemaker_folder/sgm_fld_bkp.tar.gz $sagemaker_folder
   echo "Completed!"
   echo "Upload to S3.."
-  aws s3 cp /tmp/archive.tar.gz "$1"
+  aws s3 cp $sagemaker_folder/sgm_fld_bkp.tar.gz "$1"
+  rm -fr $sagemaker_folder/sgm_fld_bkp.tar.gz
   echo "Completed!"
 }
 
@@ -22,10 +23,11 @@ upload()
 download()
 {
   echo "Download SageMaker archive..."
-  aws s3 cp "$1" /tmp/archive.tar.gz
+  aws s3 cp "$1" $sagemaker_folder/sgm_fld_bkp.tar.gz
   echo "Completed!"
   echo "Decompressing SageMaker content..."
-  tar -xzvf /tmp/archive.tar.gz
+  tar -xzvf $sagemaker_folder/sgm_fld_bkp.tar.gz
+  rm -fr $sagemaker_folder/sgm_fld_bkp.tar.gz
   echo "Completed!"
 }
 
